@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
+import SplashLoader from "@/components/SplashLoader";
 
 export const metadata: Metadata = {
   title: "TAMILSELVAN.DEV ",
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <SplashLoader />
         <CustomCursor />
         {children}
       </body>

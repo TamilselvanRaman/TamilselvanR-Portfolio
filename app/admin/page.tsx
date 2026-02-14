@@ -36,7 +36,7 @@ export default function AdminDashboard() {
     featured: false,
     order: 0,
   });
-  const [imageFile, setImageFile] = useState<File | null>(null);
+
   const [techInput, setTechInput] = useState('');
   const [hasUnsavedOrder, setHasUnsavedOrder] = useState(false);
 
@@ -106,17 +106,10 @@ export default function AdminDashboard() {
   async function handleProjectSubmit(e: FormEvent) {
     e.preventDefault();
     
-    let imageUrl = formData.imageUrl;
-    
-    if (imageFile) {
-      const tempId = editingProject?.id || `temp_${Date.now()}`;
-      const uploadedUrl = await uploadProjectImage(imageFile, tempId);
-      if (uploadedUrl) {
-        imageUrl = uploadedUrl;
-      }
-    }
+    // Image URL is already in formData (either existing URL or new Base64 string)
+    // No need to upload to Storage anymore as we store Base64 directly in Firestore
 
-    const projectData = { ...formData, imageUrl };
+    const projectData = { ...formData };
 
     if (editingProject) {
       await updateProject(editingProject.id, projectData);
@@ -142,7 +135,6 @@ export default function AdminDashboard() {
       featured: false,
       order: 0,
     });
-    setImageFile(null);
     setTechInput('');
   }
 
@@ -344,7 +336,7 @@ export default function AdminDashboard() {
                       <label className="block text-sm font-medium text-gray-700 mb-2">Project Image</label>
                       <ImageUpload 
                         currentImage={formData.imageUrl} 
-                        onImageSelected={setImageFile}
+                        onImageSelected={(base64) => setFormData({ ...formData, imageUrl: base64 || '' })}
                       />
                     </div>
                   </div>

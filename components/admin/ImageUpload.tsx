@@ -3,7 +3,7 @@ import { FaCloudUploadAlt, FaImage, FaTimes } from 'react-icons/fa';
 
 interface ImageUploadProps {
   currentImage?: string;
-  onImageSelected: (file: File | null) => void;
+  onImageSelected: (image: string | null) => void;
 }
 
 export default function ImageUpload({ currentImage, onImageSelected }: ImageUploadProps) {
@@ -46,10 +46,11 @@ export default function ImageUpload({ currentImage, onImageSelected }: ImageUplo
     
     const reader = new FileReader();
     reader.onloadend = () => {
-      setPreview(reader.result as string);
+      const base64String = reader.result as string;
+      setPreview(base64String);
+      onImageSelected(base64String);
     };
     reader.readAsDataURL(file);
-    onImageSelected(file);
   };
 
   const removeImage = (e: React.MouseEvent) => {

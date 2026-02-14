@@ -1,0 +1,25 @@
+<svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- C Shape (Hexagonal Bracket) -->
+  <path d="M150 70 L80 110 L80 190 L150 230" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M150 70 L180 85" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round"/>
+  <path d="M150 230 L180 215" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round"/>
+
+  <!-- O Shape (Power Button) -->
+  <path d="M350 100 A 70 70 0 1 0 390 100" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round"/>
+  <line x1="320" y1="80" x2="320" y2="130" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round"/>
+  
+  <!-- D Shape -->
+  <path d="M480 80 H 530 A 70 70 0 0 1 530 220 H 480 V 80 Z" stroke="#FFFFFF" stroke-width="25" stroke-linejoin="round"/>
+
+  <!-- E Shape -->
+  <path d="M650 80 H 720" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round"/>
+  <path d="M650 150 H 700" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round"/>
+  <path d="M650 220 H 720" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round"/>
+  <path d="M650 80 V 220" stroke="#FFFFFF" stroke-width="25" stroke-linecap="round"/>
+
+  <!-- Circuit Connector Line -->
+  <!-- Connects bottom of C to E, running under O and D -->
+  <path d="M150 230 H 260 V 260 H 620 V 220 H 650" stroke="#22C55E" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Style adjusted for visibility on dark background (White text, Green circuit) -->
+</svg>

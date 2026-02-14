@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
@@ -14,6 +14,11 @@ export default function Contact() {
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [matrixContent, setMatrixContent] = useState('');
+
+  useEffect(() => {
+    setMatrixContent(Array(2000).fill(0).map(() => Math.random() > 0.5 ? '1' : '0').join(''));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +47,7 @@ export default function Contact() {
       {/* Background Matrix Effect (Simplified) */}
       <div className="absolute inset-0 pointer-events-none opacity-5">
         <div className="text-[10px] font-mono leading-none break-all text-black">
-          {Array(2000).fill(0).map(() => Math.random() > 0.5 ? '1' : '0').join('')}
+          {matrixContent}
         </div>
       </div>
 

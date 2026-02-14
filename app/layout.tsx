@@ -4,7 +4,7 @@ import CustomCursor from "@/components/CustomCursor";
 import SplashLoader from "@/components/SplashLoader";
 
 export const metadata: Metadata = {
-  title: "TAMILSELVAN.DEV ",
+  title: "TAMILSELVAN.DEV",
   description: "I build digital products that refuse to be ignored.",
 };
 

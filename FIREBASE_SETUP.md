@@ -75,3 +75,22 @@ Document fields:
 - Admin panel is accessible without authentication (add auth later)
 - Images are stored in Firebase Storage
 - All changes sync in real-time
+
+## Troubleshooting
+
+### Firebase Connection Issues
+
+If your deployed application is not connecting to Firebase, it is likely due to missing environment variables.
+
+1.  **Check Browser Console**: Open your browser's developer tools (F12) and look for errors in the Console tab. If you see "Missing Firebase configuration keys", your environment variables are not set correctly.
+
+2.  **Verify Environment Variables**:
+    -   Ensure you have added all variables from `.env.local` to your deployment platform (Vercel, Netlify, etc.).
+    -   Make sure variable names start with `NEXT_PUBLIC_`.
+
+3.  **Local Verification**:
+    Run the following script locally to check your `.env.local` file:
+    ```bash
+    node scripts/check-env.js
+    ```
+

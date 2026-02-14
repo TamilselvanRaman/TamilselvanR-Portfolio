@@ -25,8 +25,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#1E1E1E] border-t-4 border-brutalist-black relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <footer className="bg-[#1E1E1E] border-t-4 border-brutalist-black relative overflow-hidden z-10">
+      <div className="max-w-7xl mx-auto px-6 py-12 relative z-20">
         
         {/* Terminal Header Style */}
         <div className="bg-[#323233] border-4 border-brutalist-black shadow-[8px_8px_0px_#000] mb-8">

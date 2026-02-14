@@ -14,6 +14,7 @@ interface Message {
   name: string;
   email: string;
   projectDetails: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createdAt: any;
 }
 

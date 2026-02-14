@@ -134,7 +134,7 @@ export default function Contact() {
               <div className="mt-12 p-4 bg-[#252526] border border-gray-700 rounded text-xs leading-relaxed text-gray-400">
                 <span className="text-blue-400">function</span> <span className="text-yellow-300">sendMessage</span>() {'{'}
                 <br />
-                &nbsp;&nbsp;<span className="text-purple-400">return</span> <span className="text-orange-300">"I'll get back to you ASAP!"</span>;
+                &nbsp;&nbsp;<span className="text-purple-400">return</span> <span className="text-orange-300">&quot;I&apos;ll get back to you ASAP!&quot;</span>;
                 <br />
                 {'}'}
               </div>

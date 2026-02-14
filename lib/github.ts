@@ -101,6 +101,7 @@ export async function getGitHubStats(): Promise<GitHubStats | null> {
             totalContributions = calendar.totalContributions;
             
             // Get all contribution days from the full year
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const allDays = calendar.weeks.flatMap((week: any) => week.contributionDays);
             contributionDays = allDays; // Use all available data
           }

@@ -84,10 +84,10 @@ export default function Hero() {
       transition: {
         duration: 4,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: [0.42, 0, 0.58, 1]
       }
     }
-  };
+  } as any;
 
   return (
     <div className="relative overflow-hidden  -mt-16">
@@ -104,7 +104,7 @@ export default function Hero() {
           transition={{ 
             duration: 8, 
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: [0.42, 0, 0.58, 1]
           }}
         >
           <h1 className="text-[6rem] md:text-[18rem] font-black text-black select-none opacity-80">
@@ -138,7 +138,7 @@ export default function Hero() {
               transition={{ 
                 duration: 1.5, 
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: [0.42, 0, 0.58, 1]
               }}
             />
             <span className="text-xs font-bold uppercase tracking-wide">
@@ -194,7 +194,7 @@ export default function Hero() {
                   transition={{ 
                     duration: 3 + (i % 2), 
                     repeat: Infinity, 
-                    ease: "easeInOut",
+                    ease: [0.42, 0, 0.58, 1],
                     delay: i * 0.2 
                   }}
                 >

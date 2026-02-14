@@ -77,7 +77,7 @@ export default function TechStack() {
               {'>'} techStack.load()
             </h2>
           </div>
-          <p className="text-sm font-mono text-gray-600 ml-6">// Technologies & Tools I work with</p>
+          <p className="text-sm font-mono text-gray-600 ml-6">{'// Technologies & Tools I work with'}</p>
         </motion.div>
 
         {/* TERMINAL WINDOW */}
@@ -106,7 +106,7 @@ export default function TechStack() {
               <span className="text-blue-400">technologies</span>{' '}
               <span className="text-yellow-300">{'}'}</span>{' '}
               <span className="text-purple-400">from</span>{' '}
-              <span className="text-green-300">"@/stack"</span>
+              <span className="text-green-300">&quot;@/stack&quot;</span>
               <span className="text-gray-500">;</span>
             </div>
 
@@ -130,7 +130,7 @@ export default function TechStack() {
                   >
                     {/* Category Label */}
                     <div className="font-mono text-sm mb-4 flex items-center gap-2">
-                      <span className="text-gray-500">//</span>
+                      <span className="text-gray-500">{'//'}</span>
                       <span className={`${category.color} font-bold`}>{category.name}</span>
                     </div>
 
@@ -185,7 +185,7 @@ export default function TechStack() {
         {/* Terminal Command */}
         <div className="mt-6 flex items-center gap-2 font-mono text-sm text-gray-600">
           <span className="text-green-500">$</span>
-          <span>echo "Stack loaded successfully"</span>
+          <span>echo &quot;Stack loaded successfully&quot;</span>
           <span className="animate-pulse">_</span>
         </div>
 

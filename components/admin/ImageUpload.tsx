@@ -43,12 +43,49 @@ export default function ImageUpload({ currentImage, onImageSelected }: ImageUplo
       alert('Please select an image file');
       return;
     }
-    
+
+    // Compression Logic
     const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64String = reader.result as string;
-      setPreview(base64String);
-      onImageSelected(base64String);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        // Resize if too large (Max 800px width/height)
+        const MAX_SIZE = 800;
+        if (width > height) {
+          if (width > MAX_SIZE) {
+            height *= MAX_SIZE / width;
+            width = MAX_SIZE;
+          }
+        } else {
+          if (height > MAX_SIZE) {
+            width *= MAX_SIZE / height;
+            height = MAX_SIZE;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0, width, height);
+
+        // Compress to JPEG with 0.7 quality
+        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+        
+        // Check size (approx 1MB limit for safety)
+        if (compressedBase64.length > 1000000) {
+           alert("Image is still too large. Please choose a smaller image.");
+           return;
+        }
+
+        setPreview(compressedBase64);
+        onImageSelected(compressedBase64);
+      };
+      img.src = event.target?.result as string;
     };
     reader.readAsDataURL(file);
   };

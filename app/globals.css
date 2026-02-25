@@ -6,10 +6,12 @@
 
 * {
   cursor: none !important;
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -18,6 +20,7 @@ body {
   color: #000000;
   position: relative;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body::before {
@@ -63,6 +66,29 @@ body::before {
   .text-shadow-brutalist {
     text-shadow: 3px 3px 0px #000000;
   }
+
+  /* Responsive container with safe padding */
+  .container-safe {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-safe {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-safe {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
 }
 
 @keyframes pulse {
@@ -95,32 +121,6 @@ body::before {
   animation: blink 1.5s infinite;
 }
 
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-scroll {
-  display: inline-block;
-  animation: scroll 30s linear infinite;
-}
-
-@media (max-width: 768px) {
-  * {
-    cursor: auto !important;
-  }
-}
-
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-scroll {
-  animation: scroll 50s linear infinite;
-}
-
-
 @keyframes marquee {
   0% {
     transform: translateX(0%);
@@ -134,41 +134,9 @@ body::before {
   animation: marquee 25s linear infinite;
 }
 
-
 /* GLITCH EFFECT */
 .glitch {
   position: relative;
-}
-
-.glitch::before,
-.glitch::after {
-  content: "EXPERIENCE_LOG";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  color: #00ff00;
-  clip: rect(0, 900px, 0, 0);
-}
-
-.glitch::before {
-  animation: glitchTop 2s infinite linear alternate-reverse;
-}
-
-.glitch::after {
-  animation: glitchBottom 2s infinite linear alternate-reverse;
-}
-
-@keyframes glitchTop {
-  0% { clip: rect(0, 9999px, 0, 0); }
-  50% { clip: rect(0, 9999px, 50px, 0); }
-  100% { clip: rect(0, 9999px, 0, 0); }
-}
-
-@keyframes glitchBottom {
-  0% { clip: rect(0, 9999px, 0, 0); }
-  50% { clip: rect(50px, 9999px, 100px, 0); }
-  100% { clip: rect(0, 9999px, 0, 0); }
 }
 
 /* CRT Scanlines */
@@ -188,4 +156,27 @@ body::before {
     rgba(255,255,255,0.03) 0%,
     rgba(0,0,0,0.4) 100%
   );
+}
+
+/* Mobile - restore cursor and fix overflow */
+@media (max-width: 768px) {
+  * {
+    cursor: auto !important;
+  }
+  
+  section {
+    overflow-x: hidden;
+  }
+}
+
+/* Thin scrollbar for contribution graph */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #1E1E1E;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 2px;
 }

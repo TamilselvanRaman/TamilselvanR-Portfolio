@@ -1,13 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaReact, FaNodeJs, FaJava, FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import AuthModal from './AuthModal';
 
 export default function Navbar() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu when clicking a link
+  const handleLinkClick = () => setMobileMenuOpen(false);
 
   const navLinks = [
     { name: '/ABOUT', href: '#about' },
@@ -16,17 +26,16 @@ export default function Navbar() {
     { name: '/WORK', href: '#work' },
   ];
 
-  // Brutalist Box Button Style
   const baseButton =
-    'border-2 border-black bg-[#F5F5DC] px-4 py-2 font-extrabold text-black shadow-[5px_5px_0px_#000] transition-all font-mono';
+    'border-2 border-black bg-[#F5F5DC] px-3 py-2 font-extrabold text-black shadow-[4px_4px_0px_#000] transition-all font-mono text-sm';
 
   const primaryButton =
-    'border-2 border-black bg-yellow-400 px-4 py-2 font-extrabold text-black shadow-[5px_5px_0px_#000] transition-all font-mono';
+    'border-2 border-black bg-yellow-400 px-3 py-2 font-extrabold text-black shadow-[4px_4px_0px_#000] transition-all font-mono text-sm';
 
   return (
     <>
       <motion.header
-        className="sticky top-0 -mt-16 z-50"
+        className={`sticky top-0 -mt-16 z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-sm' : ''}`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ 
@@ -36,12 +45,12 @@ export default function Navbar() {
           stiffness: 100 
         }}
       >
-        <div className="w-full px-8 md:px-16">
-          <div className="flex items-center justify-between py-6">
+        <div className="w-full px-4 sm:px-6 md:px-10 lg:px-16">
+          <div className="flex items-center justify-between py-4 md:py-6">
 
-            {/* LOGO with coder touch */}
+            {/* LOGO */}
             <motion.div
-              className="ml-15 border-2 border-black bg-yellow-300 px-6 py-2 font-black text-black shadow-[6px_6px_0px_#000] font-mono flex items-center gap-2"
+              className="border-2 border-black bg-yellow-300 px-3 sm:px-5 py-1.5 sm:py-2 font-black text-black shadow-[4px_4px_0px_#000] sm:shadow-[6px_6px_0px_#000] font-mono flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ 
@@ -58,13 +67,15 @@ export default function Navbar() {
               whileTap={{ scale: 0.95 }}
             >
               <span className="text-green-600">{'>'}</span>
-              TAMILSELVAN.DEV
+              <span className="hidden xs:inline">TAMILSELVAN.DEV</span>
+              <span className="xs:hidden">TSR.DEV</span>
             </motion.div>
 
             {/* MOBILE MENU BUTTON */}
             <motion.button
-              className="md:hidden text-2xl p-2 border-2 border-black bg-white shadow-[4px_4px_0px_#000]"
+              className="md:hidden text-xl p-2.5 border-2 border-black bg-white shadow-[4px_4px_0px_#000] flex items-center justify-center"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               whileTap={{ scale: 0.95 }}
@@ -73,8 +84,7 @@ export default function Navbar() {
             </motion.button>
 
             {/* DESKTOP NAV */}
-            <nav className="hidden md:flex items-center gap-6">
-
+            <nav className="hidden md:flex items-center gap-3 lg:gap-5">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
@@ -89,13 +99,9 @@ export default function Navbar() {
                     stiffness: 100
                   }}
                   whileHover={{
-                    y: [-2, -6, -2],
-                    boxShadow: ["5px 5px 0px #000", "8px 8px 0px #000", "5px 5px 0px #000"],
-                    transition: {
-                      duration: 0.8,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }
+                    y: -4,
+                    boxShadow: "8px 8px 0px #000",
+                    transition: { duration: 0.2 }
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -105,7 +111,7 @@ export default function Navbar() {
 
               <motion.a
                 href="#contact"
-                className={`mr-15 ${primaryButton} flex items-center gap-2`}
+                className={`${primaryButton} flex items-center gap-2`}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ 
@@ -115,34 +121,29 @@ export default function Navbar() {
                   stiffness: 100
                 }}
                 whileHover={{
-                  y: [-2, -6, -2],
-                  boxShadow: ["5px 5px 0px #000", "8px 8px 0px #000", "5px 5px 0px #000"],
+                  y: -4,
+                  boxShadow: "8px 8px 0px #000",
                   scale: 1.05,
-                  transition: {
-                    duration: 0.8,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }
+                  transition: { duration: 0.2 }
                 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="text-green-600">{'>'}</span>
                 HIRE ME
               </motion.a>
-
             </nav>
           </div>
 
           {/* MOBILE MENU DROPDOWN */}
           <AnimatePresence>
             {mobileMenuOpen && (
-              <motion.div
-                className="md:hidden mt-6 flex flex-col gap-5 border-4 border-black bg-white p-6 shadow-[6px_6px_0px_#000]"
-                initial={{ opacity: 0, y: -30, scale: 0.95 }}
+              <motion.nav
+                className="md:hidden flex flex-col gap-3 border-4 border-black bg-white p-4 sm:p-6 shadow-[6px_6px_0px_#000] mb-4"
+                initial={{ opacity: 0, y: -20, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                exit={{ opacity: 0, y: -20, scale: 0.97 }}
                 transition={{ 
-                  duration: 0.3,
+                  duration: 0.25,
                   type: "spring",
                   damping: 20
                 }}
@@ -151,19 +152,15 @@ export default function Navbar() {
                   <motion.a
                     key={link.name}
                     href={link.href}
-                    className={baseButton}
-                    onClick={() => setMobileMenuOpen(false)}
+                    className={`${baseButton} text-center`}
+                    onClick={handleLinkClick}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.07 }}
                     whileHover={{ 
-                      x: [0, 6, 0],
-                      boxShadow: ["5px 5px 0px #000", "8px 8px 0px #000", "5px 5px 0px #000"],
-                      transition: {
-                        duration: 0.8,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }
+                      x: 6,
+                      boxShadow: "8px 8px 0px #000",
+                      transition: { duration: 0.2 }
                     }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -173,26 +170,22 @@ export default function Navbar() {
 
                 <motion.a
                   href="#contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`${primaryButton} flex items-center gap-2`}
+                  onClick={handleLinkClick}
+                  className={`${primaryButton} flex items-center justify-center gap-2`}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navLinks.length * 0.1 }}
+                  transition={{ delay: navLinks.length * 0.07 }}
                   whileHover={{ 
-                    x: [0, 6, 0],
-                    boxShadow: ["5px 5px 0px #000", "8px 8px 0px #000", "5px 5px 0px #000"],
-                    transition: {
-                      duration: 0.8,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }
+                    x: 6,
+                    boxShadow: "8px 8px 0px #000",
+                    transition: { duration: 0.2 }
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <span className="text-green-600">{'>'}</span>
                   HIRE ME
                 </motion.a>
-              </motion.div>
+              </motion.nav>
             )}
           </AnimatePresence>
 

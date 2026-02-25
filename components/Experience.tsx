@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Experience() {
   const [displayedLines, setDisplayedLines] = useState<string[]>([]);
@@ -39,40 +40,52 @@ export default function Experience() {
   }, [currentLine]);
 
   return (
-    <section id="curated" className="bg-[#f2f0e6] py-28 px-6">
+    <section id="curated" className="bg-[#f2f0e6] py-16 sm:py-20 md:py-28 px-4 sm:px-6 overflow-hidden">
       <div className="max-w-6xl mx-auto">
 
         {/* SECTION TITLE */}
-        <h2 className="text-5xl font-extrabold mb-12 uppercase tracking-tight">
+        <motion.h2
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-8 sm:mb-10 md:mb-12 uppercase tracking-tight"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           EXPERIENCE_LOG
-        </h2>
+        </motion.h2>
 
         {/* TERMINAL WINDOW */}
-        <div className="border-[5px] border-black shadow-[12px_12px_0px_#000] bg-black text-green-400">
+        <motion.div
+          className="border-[3px] sm:border-[5px] border-black shadow-[6px_6px_0px_#000] sm:shadow-[12px_12px_0px_#000] bg-black text-green-400"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
 
           {/* TERMINAL HEADER */}
-          <div className="flex items-center justify-between px-6 py-3 border-b-4 border-black bg-gray-900 text-white font-mono text-xs">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          <div className="flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 border-b-2 sm:border-b-4 border-black bg-gray-900 text-white font-mono text-[10px] sm:text-xs">
+            <div className="flex gap-1.5 sm:gap-2">
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-yellow-400 rounded-full"></div>
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
             </div>
-            <span>root@portfolio:~/experience</span>
+            <span className="text-[10px] sm:text-xs truncate ml-2">root@portfolio:~/experience</span>
           </div>
 
           {/* TERMINAL BODY */}
-          <div className="h-[400px] overflow-y-auto overflow-x-auto font-mono text-sm p-4 md:p-8 relative">
+          <div className="h-[280px] sm:h-[340px] md:h-[400px] overflow-y-auto overflow-x-auto font-mono text-xs sm:text-sm p-3 sm:p-5 md:p-8 relative">
 
             {displayedLines.map((line, index) => (
-              <div key={index} className="flex">
+              <div key={index} className="flex min-w-0">
 
                 {/* LINE NUMBERS */}
-                <span className="w-8 text-gray-500 select-none">
+                <span className="w-6 sm:w-8 text-gray-500 select-none flex-shrink-0 text-right mr-2 sm:mr-3">
                   {index + 1}
                 </span>
 
                 {/* CONTENT */}
-                <span className="flex-1 whitespace-pre-wrap">
+                <span className="flex-1 whitespace-pre-wrap break-words min-w-0">
                   {syntaxHighlight(line)}
                 </span>
 
@@ -82,7 +95,7 @@ export default function Experience() {
             {/* BLINKING CURSOR */}
             {currentLine >= terminalLines.length && (
               <div className="flex">
-                <span className="w-8 text-gray-500 select-none">
+                <span className="w-6 sm:w-8 text-gray-500 select-none flex-shrink-0 text-right mr-2 sm:mr-3">
                   {displayedLines.length + 1}
                 </span>
                 <span className="flex-1">
@@ -92,6 +105,32 @@ export default function Experience() {
             )}
 
           </div>
+        </motion.div>
+
+        {/* EXPERIENCE CARDS - Mobile/Extra Info */}
+        <div className="mt-6 sm:mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { project: 'UNI_BRAINS', type: 'Medical Platform', tech: 'React, Node.js, MongoDB' },
+            { project: 'RUDY', type: 'E-commerce System', tech: 'Next.js, MySQL, Stripe' },
+            { project: 'VASANDHAM_HERBALS', type: 'Product Platform', tech: 'React, Firebase, GSAP' },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              className="border-2 border-black bg-white p-4 shadow-[4px_4px_0px_#000]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -4, boxShadow: '6px 6px 0px #000' }}
+            >
+              <div className="font-mono text-xs text-gray-500 mb-1">// Project</div>
+              <h3 className="font-black font-mono text-sm sm:text-base mb-1 break-words">{item.project}</h3>
+              <div className="text-xs sm:text-sm text-gray-600 mb-2">{item.type}</div>
+              <div className="text-[10px] sm:text-xs font-mono bg-black text-green-400 px-2 py-1 break-words">
+                {item.tech}
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>
@@ -133,128 +172,3 @@ function syntaxHighlight(line: string) {
 
   return line;
 }
-
-
-// 'use client';
-
-// import { useEffect, useRef, useState } from 'react';
-
-// export default function Experience() {
-//   const [booting, setBooting] = useState(true);
-//   const [darkMode, setDarkMode] = useState(true);
-//   const [displayedText, setDisplayedText] = useState('');
-//   const containerRef = useRef<HTMLDivElement>(null);
-
-//   const terminalScript = `
-// [SYSTEM] Booting Experience Module...
-// [SYSTEM] Verifying developer credentials...
-// [OK] Identity: Tamil Selvan
-// [OK] Role: Freelance Full Stack Developer
-// [OK] Duration: APR 2025 - PRESENT
-
-// // Projects
-// build("UNI_BRAINS") // Medical Consultation Platform
-// build("RUDY") // E-commerce System
-// build("VASANDHAM_HERBALS") // Product Platform
-
-// // Stack
-// frontend = ["React", "Tailwind", "GSAP"];
-// backend = ["Node.js", "Express", "Spring Boot"];
-// auth = "JWT Authentication";
-
-// [✓] All systems operational.
-// `;
-
-//   /* Boot animation */
-//   useEffect(() => {
-//     const bootTimer = setTimeout(() => {
-//       setBooting(false);
-//     }, 2000);
-
-//     return () => clearTimeout(bootTimer);
-//   }, []);
-
-//   /* Letter-by-letter typing */
-//   useEffect(() => {
-//     if (!booting) {
-//       let i = 0;
-//       const typing = setInterval(() => {
-//         setDisplayedText(terminalScript.slice(0, i));
-//         i++;
-
-//         // Auto scroll
-//         if (containerRef.current) {
-//           containerRef.current.scrollTop =
-//             containerRef.current.scrollHeight;
-//         }
-
-//         if (i > terminalScript.length) clearInterval(typing);
-//       }, 20);
-
-//       return () => clearInterval(typing);
-//     }
-//   }, [booting]);
-
-//   return (
-//     <section
-//       className={`relative py-28 px-6 ${
-//         darkMode ? 'bg-black text-green-400' : 'bg-[#f2f0e6] text-black'
-//       }`}
-//     >
-//       <div className="max-w-6xl mx-auto relative">
-
-//         {/* DARK MODE TOGGLE */}
-//         <div className="flex justify-end mb-6">
-//           <button
-//             onClick={() => setDarkMode(!darkMode)}
-//             className="border-2 border-black px-4 py-2 font-bold bg-yellow-400 text-black shadow-[5px_5px_0px_#000]"
-//           >
-//             {darkMode ? 'LIGHT MODE' : 'DARK MODE'}
-//           </button>
-//         </div>
-
-//         {/* GLITCH TITLE */}
-//         <h2 className="text-5xl font-extrabold mb-12 uppercase relative glitch">
-//           EXPERIENCE_LOG
-//         </h2>
-
-//         {/* TERMINAL WINDOW */}
-//         <div className="border-[5px] border-black shadow-[12px_12px_0px_#000] overflow-hidden relative">
-
-//           {/* HEADER */}
-//           <div className="flex items-center justify-between px-6 py-3 bg-gray-900 text-white font-mono text-xs border-b-4 border-black">
-//             <div className="flex gap-2">
-//               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-//               <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-//               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-//             </div>
-//             root@portfolio:~/experience
-//           </div>
-
-//           {/* BODY */}
-//           <div
-//             ref={containerRef}
-//             className="h-[450px] overflow-y-auto font-mono text-sm p-8 relative"
-//           >
-//             {booting ? (
-//               <p className="animate-pulse">Booting terminal...</p>
-//             ) : (
-//               <>
-//                 <pre className="whitespace-pre-wrap">
-//                   {displayedText}
-//                 </pre>
-//                 <span className="animate-pulse">█</span>
-//               </>
-//             )}
-//           </div>
-
-//           {/* CRT SCANLINE OVERLAY */}
-//           <div className="absolute inset-0 pointer-events-none crt-overlay"></div>
-//         </div>
-//       </div>
-
-//       {/* CRT GLOBAL EFFECT */}
-//       <div className="absolute inset-0 pointer-events-none scanlines"></div>
-//     </section>
-//   );
-// }

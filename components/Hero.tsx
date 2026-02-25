@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaReact, FaNodeJs, FaJava, FaBars } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaJava } from 'react-icons/fa';
 import { SiNextdotjs, SiMongodb, SiTailwindcss } from 'react-icons/si';
 
 export default function Hero() {
@@ -22,7 +22,6 @@ export default function Hero() {
     "JWT AUTH","DATA STRUCTURES","ALGORITHMS"
   ];
 
-  // Enhanced Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -31,31 +30,6 @@ export default function Hero() {
         staggerChildren: 0.1,
         delayChildren: 0.05,
       }
-    }
-  };
-
-  const letterContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const letterVariants = {
-    hidden: { y: 20, opacity: 0, rotateX: -90 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      rotateX: 0,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 150
-      } as any
     }
   };
 
@@ -90,12 +64,13 @@ export default function Hero() {
   } as any;
 
   return (
-    <div className="relative overflow-hidden  -mt-16">
+    <div className="relative overflow-hidden -mt-16 w-full">
       {/* HERO SECTION */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 py-10 bg-[#F5F5DC]">
+      <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 py-16 sm:py-20 bg-[#F5F5DC]">
 
+        {/* Background watermark */}
         <motion.div 
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
             opacity: [0.03, 0.06, 0.03], 
@@ -107,7 +82,7 @@ export default function Hero() {
             ease: [0.42, 0, 0.58, 1]
           }}
         >
-          <h1 className="text-[6rem] md:text-[18rem] font-black text-black select-none opacity-80">
+          <h1 className="text-[5rem] sm:text-[8rem] md:text-[14rem] lg:text-[18rem] font-black text-black select-none opacity-80 whitespace-nowrap">
             CODE
           </h1>
         </motion.div>
@@ -117,12 +92,12 @@ export default function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 flex flex-col items-center"
+          className="relative z-10 flex flex-col items-center w-full max-w-5xl mx-auto"
         >
-          {/* STATUS BADGE - Pops in */}
+          {/* STATUS BADGE */}
           <motion.div
             variants={fadeUpVariants}
-            className="bg-white border-2 border-black px-4 py-2 mb-8 flex items-center gap-2 shadow-[4px_4px_0px_#000]"
+            className="bg-white border-2 border-black px-3 sm:px-4 py-2 mb-6 sm:mb-8 flex items-center gap-2 shadow-[4px_4px_0px_#000]"
             whileHover={{ 
               y: -4, 
               boxShadow: "6px 6px 0px #000",
@@ -131,7 +106,7 @@ export default function Hero() {
             }}
           >
             <motion.div
-              className="w-3 h-3 bg-green-500 rounded-full"
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full flex-shrink-0"
               animate={{ 
                 boxShadow: ["0 0 0 0px rgba(34, 197, 94, 0.7)", "0 0 0 4px rgba(34, 197, 94, 0)"],
               }}
@@ -141,23 +116,23 @@ export default function Hero() {
                 ease: [0.42, 0, 0.58, 1]
               }}
             />
-            <span className="text-xs font-bold uppercase tracking-wide">
+            <span className="text-xs font-bold uppercase tracking-wide whitespace-nowrap">
               SYSTEM STATUS: ONLINE
             </span>
           </motion.div>
 
           {/* TITLE */}
-          <div className="flex flex-col items-center mb-8 md:mb-10 overflow-hidden px-4">
+          <div className="flex flex-col items-center mb-6 sm:mb-8 md:mb-10 overflow-hidden px-2">
             <motion.h1
               variants={fadeUpVariants}
-              className="text-4xl sm:text-6xl md:text-8xl font-black text-black leading-tight"
+              className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-tight"
             >
               FULL STACK
             </motion.h1>
 
             <motion.h1
               variants={fadeUpVariants}
-              className="text-4xl sm:text-6xl md:text-8xl font-black"
+              className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black"
               style={{
                 WebkitTextStroke: '1px black',
                 WebkitTextFillColor: 'transparent',
@@ -167,19 +142,19 @@ export default function Hero() {
             </motion.h1>
           </div>
 
-          {/* TECH ICONS - Staggered & Floating */}
+          {/* TECH ICONS */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex gap-8 mb-12 flex-wrap justify-center"
+            className="flex gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12 flex-wrap justify-center px-4"
           >
             {techIcons.map((tech, i) => (
               <motion.div
                 key={i}
                 variants={fadeUpVariants}
                 custom={i}
-                className="flex flex-col items-center text-black cursor-pointer"
+                className="flex flex-col items-center text-black"
                 whileHover={{ 
                   y: -12, 
                   scale: 1.2,
@@ -190,7 +165,6 @@ export default function Hero() {
                 <motion.div
                   variants={floatVariants}
                   animate="animate"
-                  // Randomize float duration slightly for organic feel
                   transition={{ 
                     duration: 3 + (i % 2), 
                     repeat: Infinity, 
@@ -198,25 +172,25 @@ export default function Hero() {
                     delay: i * 0.2 
                   }}
                 >
-                  <div className="text-3xl mb-1">
+                  <div className="text-2xl sm:text-3xl mb-1">
                     {tech.icon}
                   </div>
                 </motion.div>
-                <span className="text-xs font-semibold mt-2">
+                <span className="text-[10px] sm:text-xs font-semibold mt-1 sm:mt-2">
                   {tech.name}
                 </span>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* CTA BUTTONS - Pop in with bounce */}
+          {/* CTA BUTTONS */}
           <motion.div 
             variants={fadeUpVariants}
-            className="flex gap-6 flex-wrap justify-center"
+            className="flex flex-col xs:flex-row gap-3 sm:gap-4 md:gap-6 flex-wrap justify-center w-full px-4"
           >
             <motion.a
               href="#work"
-              className="bg-black text-white px-8 py-4 font-bold text-sm border-2 border-black shadow-[6px_6px_0px_#000] relative overflow-hidden group"
+              className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 font-bold text-xs sm:text-sm border-2 border-black shadow-[6px_6px_0px_#000] relative overflow-hidden group text-center"
               whileHover={{ 
                 y: -6,
                 borderColor: "#FFD700",
@@ -230,7 +204,7 @@ export default function Hero() {
 
             <motion.a
               href="#"
-              className="bg-transparent border-2 border-black text-black px-8 py-4 font-bold text-sm shadow-[6px_6px_0px_#000] relative overflow-hidden group"
+              className="bg-transparent border-2 border-black text-black px-6 sm:px-8 py-3 sm:py-4 font-bold text-xs sm:text-sm shadow-[6px_6px_0px_#000] relative overflow-hidden group text-center"
               whileHover={{ 
                 y: -6,
                 color: "#fff",
@@ -246,9 +220,9 @@ export default function Hero() {
 
       </section>
 
-      {/* SCROLLING TECH BAR - Smooth slide up */}
+      {/* SCROLLING TECH BAR */}
       <motion.div 
-        className="bg-blue-600 text-white py-3 border-y-2 border-black overflow-hidden relative z-20"
+        className="bg-blue-600 text-white py-2.5 sm:py-3 border-y-2 border-black overflow-hidden relative z-20"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ 
@@ -261,7 +235,7 @@ export default function Hero() {
           {[...scrollItems, ...scrollItems].map((tech, i) => (
             <span
               key={i}
-              className="px-6 text-sm font-bold whitespace-nowrap"
+              className="px-4 sm:px-6 text-xs sm:text-sm font-bold whitespace-nowrap"
             >
               /// {tech}
             </span>

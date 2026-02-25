@@ -27,7 +27,6 @@ export default function SelectedWorks() {
     fetchProjects();
   }, []);
 
-  // Fallback projects if Firebase is not configured
   const fallbackProjects: Project[] = [
     {
       id: '1',
@@ -73,40 +72,42 @@ export default function SelectedWorks() {
   const displayProjects = projects.length > 0 ? projects : fallbackProjects;
 
   return (
-    <section id="work" className="bg-brutalist-beige py-24 px-6 border-y-4 border-brutalist-black relative overflow-hidden">
+    <section id="work" className="bg-[#F5F5DC] py-16 sm:py-20 md:py-24 px-4 sm:px-6 border-y-4 border-black relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
 
-        {/* CODING PLATFORM TITLE */}
+        {/* SECTION TITLE */}
         <motion.div 
-          className="mb-12"
+          className="mb-8 sm:mb-10 md:mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-            <h2 className="text-4xl md:text-5xl font-mono font-bold text-brutalist-black">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-blue-500 rounded-full animate-pulse flex-shrink-0"></div>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold text-black">
               {'>'} projects.fetch()
             </h2>
           </div>
-          <p className="text-sm font-mono text-gray-600 ml-6">// Featured work from my portfolio</p>
+          <p className="text-xs sm:text-sm font-mono text-gray-600 ml-4 sm:ml-6">
+            {'// Featured work from my portfolio'}
+          </p>
         </motion.div>
 
         {/* PROJECTS GRID */}
         {loading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-[#1E1E1E] border-4 border-brutalist-black h-96 animate-pulse"></div>
+              <div key={i} className="bg-[#1E1E1E] border-[3px] sm:border-4 border-black h-72 sm:h-80 md:h-96 animate-pulse"></div>
             ))}
           </div>
         ) : error ? (
-          <div className="bg-[#1E1E1E] border-4 border-brutalist-black p-8 text-center">
-            <p className="text-red-400 font-mono text-lg">ERROR: {error}</p>
-            <p className="text-gray-400 font-mono text-sm mt-2">// Using fallback data</p>
+          <div className="bg-[#1E1E1E] border-[3px] sm:border-4 border-black p-6 sm:p-8 text-center">
+            <p className="text-red-400 font-mono text-sm sm:text-lg">ERROR: {error}</p>
+            <p className="text-gray-400 font-mono text-xs sm:text-sm mt-2">{'// Using fallback data'}</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
             {displayProjects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
@@ -116,7 +117,7 @@ export default function SelectedWorks() {
       </div>
 
       {/* Background Code Pattern */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none font-mono text-xs text-brutalist-black overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none font-mono text-xs text-black overflow-hidden select-none">
         {Array.from({ length: 30 }).map((_, i) => (
           <div key={i}>
             {'const project = {...}; '.repeat(10)}
@@ -127,11 +128,11 @@ export default function SelectedWorks() {
   );
 }
 
-/* PROJECT CARD - TERMINAL STYLE */
+/* PROJECT CARD */
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
-      className="bg-[#1E1E1E] border-4 border-brutalist-black shadow-[8px_8px_0px_#000] flex flex-col"
+      className="bg-[#1E1E1E] border-[3px] sm:border-4 border-black shadow-[4px_4px_0px_#000] sm:shadow-[8px_8px_0px_#000] flex flex-col"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -139,15 +140,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       whileHover={{ y: -6, boxShadow: '10px 10px 0px #000' }}
     >
       {/* Terminal Header */}
-      <div className="bg-[#323233] border-b-2 border-brutalist-black px-4 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-500 border border-red-700"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500 border border-yellow-700"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500 border border-green-700"></div>
+      <div className="bg-[#323233] border-b-2 border-black px-3 sm:px-4 py-2 flex items-center justify-between">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500 border border-red-700 flex-shrink-0"></div>
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500 border border-yellow-700 flex-shrink-0"></div>
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500 border border-green-700 flex-shrink-0"></div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-green-400 text-xs font-mono">●</span>
-          <span className="text-white text-xs font-mono">{project.title.toLowerCase().replace(/\s+/g, '_')}.tsx</span>
+        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+          <span className="text-green-400 text-xs font-mono flex-shrink-0">●</span>
+          <span className="text-white text-[10px] sm:text-xs font-mono truncate">
+            {project.title.toLowerCase().replace(/\s+/g, '_')}.tsx
+          </span>
         </div>
       </div>
 
@@ -157,10 +160,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <img 
             src={project.imageUrl} 
             alt={project.title}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-36 sm:h-44 md:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
-          <div className="w-full h-48 flex items-center justify-center text-6xl">
+          <div className="w-full h-36 sm:h-44 md:h-48 flex items-center justify-center text-4xl sm:text-6xl">
             📦
           </div>
         )}
@@ -168,36 +171,34 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </div>
 
       {/* Terminal Content */}
-      <div className="p-5 font-mono text-sm flex-1 flex flex-col">
+      <div className="p-3 sm:p-4 md:p-5 font-mono text-xs sm:text-sm flex-1 flex flex-col">
         {/* Project Title as Code */}
-        <div className="mb-3">
+        <div className="mb-2 sm:mb-3">
           <span className="text-purple-400">const</span>{' '}
           <span className="text-blue-400">project</span>{' '}
           <span className="text-white">=</span>{' '}
           <span className="text-yellow-300">{'{'}</span>
         </div>
 
-        <div className="ml-4 space-y-2 flex-1">
+        <div className="ml-3 sm:ml-4 space-y-1.5 sm:space-y-2 flex-1">
           <div>
             <span className="text-pink-400">title:</span>{' '}
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
             <span className="text-green-300">{project.title}</span>
             <span className="text-gray-500">,</span>
           </div>
           
           <div>
             <span className="text-pink-400">desc:</span>{' '}
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <span className="text-green-300">{project.description}</span>
+            <span className="text-green-300 text-[10px] sm:text-xs">{project.description}</span>
             <span className="text-gray-500">,</span>
           </div>
 
           <div>
             <span className="text-pink-400">stack:</span>{' '}
             <span className="text-yellow-300">[</span>
-            <div className="ml-4 flex flex-wrap gap-2 mt-1">
+            <div className="ml-2 sm:ml-4 flex flex-wrap gap-1 sm:gap-2 mt-1">
               {project.technologies.map((tech, i) => (
-                <span key={i} className="text-green-300 bg-green-900/20 border border-green-500 px-2 py-0.5 text-xs">
+                <span key={i} className="text-green-300 bg-green-900/20 border border-green-500 px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-xs">
                   {tech}
                 </span>
               ))}
@@ -207,27 +208,27 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
         </div>
 
-        <div className="text-yellow-300 mb-4">{'};'}</div>
+        <div className="text-yellow-300 mb-3 sm:mb-4">{'};'}</div>
 
         {/* Action Links */}
-        <div className="flex gap-3 mt-auto pt-4 border-t-2 border-gray-800">
+        <div className="flex gap-2 sm:gap-3 mt-auto pt-3 sm:pt-4 border-t-2 border-gray-800">
           <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 border-2 border-gray-600 px-4 py-2 text-white transition-colors"
+            className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-gray-800 hover:bg-gray-700 border-2 border-gray-600 px-2 sm:px-4 py-1.5 sm:py-2 text-white transition-colors"
           >
-            <FaGithub />
-            <span className="text-xs font-mono">Code</span>
+            <FaGithub className="text-sm sm:text-base flex-shrink-0" />
+            <span className="text-[10px] sm:text-xs font-mono">Code</span>
           </a>
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 border-2 border-blue-800 px-4 py-2 text-white transition-colors"
+            className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-blue-600 hover:bg-blue-500 border-2 border-blue-800 px-2 sm:px-4 py-1.5 sm:py-2 text-white transition-colors"
           >
-            <FaExternalLinkAlt />
-            <span className="text-xs font-mono">Live</span>
+            <FaExternalLinkAlt className="text-sm sm:text-base flex-shrink-0" />
+            <span className="text-[10px] sm:text-xs font-mono">Live</span>
           </a>
         </div>
       </div>

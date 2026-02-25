@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaDownload } from 'react-icons/fa';
 import AuthModal from './AuthModal';
 
 export default function Navbar() {
@@ -110,12 +110,36 @@ export default function Navbar() {
               ))}
 
               <motion.a
+                href="/Resume/TAMIL SELVAN R KSRCE - IT.pdf"
+                download="TAMIL_SELVAN_Resume.pdf"
+                className={`${baseButton} flex items-center gap-1.5`}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ 
+                  delay: 0.75,
+                  type: "spring",
+                  damping: 10,
+                  stiffness: 100
+                }}
+                whileHover={{
+                  y: -4,
+                  boxShadow: "8px 8px 0px #000",
+                  scale: 1.05,
+                  transition: { duration: 0.2 }
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaDownload className="text-xs flex-shrink-0" />
+                /CV
+              </motion.a>
+
+              <motion.a
                 href="#contact"
                 className={`${primaryButton} flex items-center gap-2`}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ 
-                  delay: 0.8,
+                  delay: 0.9,
                   type: "spring",
                   damping: 10,
                   stiffness: 100
@@ -169,12 +193,31 @@ export default function Navbar() {
                 ))}
 
                 <motion.a
+                  href="/Resume/TAMIL SELVAN R KSRCE - IT.pdf"
+                  download="TAMIL_SELVAN_Resume.pdf"
+                  onClick={handleLinkClick}
+                  className={`${baseButton} flex items-center justify-center gap-2 text-center`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navLinks.length * 0.07 }}
+                  whileHover={{ 
+                    x: 6,
+                    boxShadow: "8px 8px 0px #000",
+                    transition: { duration: 0.2 }
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaDownload className="text-xs flex-shrink-0" />
+                  DOWNLOAD CV
+                </motion.a>
+
+                <motion.a
                   href="#contact"
                   onClick={handleLinkClick}
                   className={`${primaryButton} flex items-center justify-center gap-2`}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navLinks.length * 0.07 }}
+                  transition={{ delay: (navLinks.length + 1) * 0.07 }}
                   whileHover={{ 
                     x: 6,
                     boxShadow: "8px 8px 0px #000",

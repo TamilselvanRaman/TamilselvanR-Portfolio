@@ -203,8 +203,9 @@ export default function Hero() {
             </motion.a>
 
             <motion.a
-              href="#"
-              className="bg-transparent border-2 border-black text-black px-6 sm:px-8 py-3 sm:py-4 font-bold text-xs sm:text-sm shadow-[6px_6px_0px_#000] relative overflow-hidden group text-center"
+              href="/Resume/TAMIL SELVAN R KSRCE - IT.pdf"
+              download="TAMIL_SELVAN_Resume.pdf"
+              className="bg-transparent border-2 border-black text-black px-6 sm:px-8 py-3 sm:py-4 font-bold text-xs sm:text-sm shadow-[6px_6px_0px_#000] relative overflow-hidden group text-center flex items-center justify-center gap-2"
               whileHover={{ 
                 y: -6,
                 color: "#fff",
@@ -212,7 +213,12 @@ export default function Hero() {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="relative z-10">DOWNLOAD CV</span>
+              <span className="relative z-10 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 4v11" />
+                </svg>
+                DOWNLOAD CV
+              </span>
               <div className="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 -z-0"></div>
             </motion.a>
           </motion.div>

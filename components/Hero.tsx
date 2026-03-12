@@ -135,7 +135,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 w-full max-w-sm sm:max-w-none sm:justify-center px-4"
           >
             <motion.a
-              href="#work"
+              href="/projects"
               className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 font-bold text-sm border-2 border-black shadow-[6px_6px_0px_#000] relative overflow-hidden group text-center"
               whileHover={{ y: -6, borderColor: '#FFD700', boxShadow: '10px 10px 0px #FFD700' }}
               whileTap={{ scale: 0.95 }}

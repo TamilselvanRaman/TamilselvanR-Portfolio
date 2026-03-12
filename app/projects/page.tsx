@@ -6,13 +6,11 @@ import { getProjects } from '@/lib/projects';
 import { Project } from '@/types/project';
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaTerminal, FaImages } from 'react-icons/fa';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<string>('all');
-  const router = useRouter();
+
 
   useEffect(() => {
     async function fetchProjects() {
@@ -27,12 +25,6 @@ export default function ProjectsPage() {
     }
     fetchProjects();
   }, []);
-
-  const allTags = ['all', ...Array.from(new Set(projects.flatMap(p => p.technologies)))].slice(0, 14);
-
-  const filtered = filter === 'all'
-    ? projects
-    : projects.filter(p => p.technologies.includes(filter));
 
   return (
     <div className="min-h-screen bg-[#F5F5DC]">
@@ -65,27 +57,10 @@ export default function ProjectsPage() {
             </Link>
           </div>
           {!loading && (
-            <div className="mt-4 flex flex-wrap gap-3 font-mono text-xs">
+            <div className="mt-4 font-mono text-xs">
               <span className="text-green-400"><span className="text-gray-500">total:</span> {projects.length} projects</span>
-              <span className="text-blue-400"><span className="text-gray-500">showing:</span> {filtered.length}</span>
             </div>
           )}
-        </div>
-      </div>
-
-      {/* FILTER TAGS */}
-      <div className="bg-[#F5F5DC] border-b-2 border-black px-4 sm:px-6 md:px-10 py-3 sm:py-4 sticky top-0 z-30" style={{ overflowX: 'clip' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex gap-2 overflow-x-auto pb-1">
-            {allTags.map((tag) => (
-              <button key={tag} onClick={() => setFilter(tag)}
-                className={`flex-shrink-0 px-3 py-1 border-2 border-black font-mono text-[10px] sm:text-xs font-bold transition-all ${
-                  filter === tag ? 'bg-black text-white shadow-[3px_3px_0px_#FFD700]' : 'bg-white text-black hover:bg-yellow-300'
-                }`}>
-                {tag === 'all' ? '# ALL' : tag}
-              </button>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -95,15 +70,9 @@ export default function ProjectsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="bg-[#1E1E1E] border-4 border-black h-72 animate-pulse" />)}
           </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-20 font-mono">
-            <div className="text-4xl mb-4">📭</div>
-            <p className="text-gray-600">// No projects found for &quot;{filter}&quot;</p>
-            <button onClick={() => setFilter('all')} className="mt-4 underline text-blue-600 text-sm">Clear filter</button>
-          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
-            {filtered.map((project, index) => (
+            {projects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
@@ -114,7 +83,7 @@ export default function ProjectsPage() {
       <div className="border-t-4 border-black bg-[#1E1E1E] px-4 sm:px-6 md:px-10 py-4 sm:py-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <span className="font-mono text-xs sm:text-sm text-gray-400">
-            <span className="text-green-400">$</span> echo &quot;{filtered.length} projects loaded&quot; <span className="animate-pulse">_</span>
+            <span className="text-green-400">$</span> echo &quot;{projects.length} projects loaded&quot; <span className="animate-pulse">_</span>
           </span>
           <Link href="/#contact"
             className="border-2 border-black bg-yellow-400 px-4 py-2 font-mono font-bold text-xs sm:text-sm shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] transition-all">

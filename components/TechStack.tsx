@@ -1,29 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { FaReact, FaNodeJs, FaJava, FaGitAlt, FaGithub, FaDocker, FaFigma } from 'react-icons/fa';
 import {
-  FaReact,
-  FaNodeJs,
-  FaJava,
-  FaGitAlt,
-  FaGithub,
-  FaDocker,
-  FaFigma,
-} from 'react-icons/fa';
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiMongodb,
-  SiMysql,
-  SiFirebase,
-  SiSpringboot,
-  SiJavascript,
-  SiHtml5,
-  SiCss3,
-  SiExpress,
-  SiJsonwebtokens,
-  SiSupabase,
+  SiNextdotjs, SiTypescript, SiTailwindcss, SiMongodb, SiMysql,
+  SiFirebase, SiSpringboot, SiJavascript, SiHtml5, SiCss3,
+  SiExpress, SiJsonwebtokens, SiSupabase,
 } from 'react-icons/si';
 
 export default function TechStack() {
@@ -60,20 +42,20 @@ export default function TechStack() {
   ];
 
   return (
-    <section id="threads" className="bg-[#F5F5DC] py-16 sm:py-20 md:py-24 px-4 sm:px-6 border-y-4 border-black relative overflow-hidden">
+    <section id="threads" className="bg-[#F5F5DC] py-16 sm:py-20 md:py-24 px-4 sm:px-6 border-y-4 border-black relative overflow-x-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* SECTION TITLE */}
-        <motion.div 
-          className="mb-8 sm:mb-10 md:mb-12"
+        <motion.div
+          className="mb-8 sm:mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center gap-2 sm:gap-3 mb-2">
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-purple-500 rounded-full animate-pulse flex-shrink-0"></div>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold text-black">
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-purple-500 rounded-full animate-pulse flex-shrink-0" />
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-mono font-bold text-black truncate">
               {'>'} techStack.load()
             </h2>
           </div>
@@ -83,8 +65,8 @@ export default function TechStack() {
         </motion.div>
 
         {/* TERMINAL WINDOW */}
-        <motion.div 
-          className="bg-[#1E1E1E] border-[3px] sm:border-4 border-black shadow-[4px_4px_0px_#000] sm:shadow-[8px_8px_0px_#000]"
+        <motion.div
+          className="bg-[#1E1E1E] border-[3px] sm:border-4 border-black shadow-[4px_4px_0px_#000] sm:shadow-[8px_8px_0px_#000] overflow-hidden"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -92,34 +74,20 @@ export default function TechStack() {
         >
           {/* Terminal Header */}
           <div className="bg-[#323233] border-b-2 border-black px-3 sm:px-4 py-2 flex items-center gap-2">
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500 border border-red-700 flex-shrink-0"></div>
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500 border border-yellow-700 flex-shrink-0"></div>
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500 border border-green-700 flex-shrink-0"></div>
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500 flex-shrink-0" />
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500 flex-shrink-0" />
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500 flex-shrink-0" />
             <span className="text-white text-xs sm:text-sm font-mono ml-1 sm:ml-2 truncate">technologies.tsx</span>
           </div>
 
           {/* Terminal Content */}
-          <div className="p-4 sm:p-6 md:p-8">
-            
-            {/* Import Statement */}
-            <div className="font-mono text-xs sm:text-sm mb-6 sm:mb-8 overflow-x-auto">
-              <span className="text-purple-400">import</span>{' '}
-              <span className="text-yellow-300">{'{'}</span>{' '}
-              <span className="text-blue-400">technologies</span>{' '}
-              <span className="text-yellow-300">{'}'}</span>{' '}
-              <span className="text-purple-400">from</span>{' '}
-              <span className="text-green-300">&quot;@/stack&quot;</span>
-              <span className="text-gray-500">;</span>
-            </div>
-
-            {/* Categories */}
-            <div className="space-y-6 sm:space-y-8 md:space-y-10">
+          <div className="p-3 sm:p-6 md:p-8">
+            <div className="space-y-5 sm:space-y-8">
               {categories.map((category, catIndex) => {
-                const categoryTechs = technologies.filter(t => 
-                  (category.key === 'tools' && (t.category === 'tools' || t.category === 'design')) || 
+                const categoryTechs = technologies.filter(t =>
+                  (category.key === 'tools' && (t.category === 'tools' || t.category === 'design')) ||
                   t.category === category.key
                 );
-                
                 if (categoryTechs.length === 0) return null;
 
                 return (
@@ -128,60 +96,47 @@ export default function TechStack() {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: catIndex * 0.1 }}
+                    transition={{ delay: catIndex * 0.08 }}
                   >
                     {/* Category Label */}
-                    <div className="font-mono text-xs sm:text-sm mb-3 sm:mb-4 flex items-center gap-2">
+                    <div className="font-mono text-xs sm:text-sm mb-2 sm:mb-3 flex items-center gap-2">
                       <span className="text-gray-500">{'//'}</span>
                       <span className={`${category.color} font-bold`}>{category.name}</span>
                     </div>
 
-                    {/* Tech Array header */}
-                    <div className="font-mono text-xs sm:text-sm mb-2">
-                      <span className="text-purple-400">const</span>{' '}
-                      <span className="text-blue-400">{category.key}</span>{' '}
-                      <span className="text-white">=</span>{' '}
-                      <span className="text-yellow-300">[</span>
-                    </div>
-
-                    {/* Tech Grid - responsive columns */}
-                    <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4 ml-3 sm:ml-6 mb-2">
+                    {/* Tech Grid — 3 cols on mobile, scales up */}
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3">
                       {categoryTechs.map((tech, index) => (
                         <motion.div
                           key={tech.name}
-                          className="bg-[#0D1117] border-2 border-gray-700 hover:border-yellow-400 p-2 sm:p-3 md:p-4 flex flex-col items-center justify-center gap-1 sm:gap-2 cursor-pointer group transition-all"
+                          className="bg-[#0D1117] border-2 border-gray-700 hover:border-yellow-400 p-2 sm:p-3 flex flex-col items-center justify-center gap-1 cursor-pointer group transition-colors"
                           initial={{ opacity: 0, scale: 0.8 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
-                          transition={{ delay: catIndex * 0.1 + index * 0.05 }}
+                          transition={{ delay: catIndex * 0.08 + index * 0.04 }}
                           whileHover={{ y: -4, scale: 1.05 }}
                         >
-                          <div className={`text-2xl sm:text-3xl md:text-4xl ${tech.color} group-hover:scale-110 transition-transform`}>
+                          <div className={`text-xl sm:text-2xl md:text-3xl ${tech.color} group-hover:scale-110 transition-transform`}>
                             {tech.icon}
                           </div>
-                          <span className="text-[9px] sm:text-xs font-mono text-gray-400 group-hover:text-white transition-colors text-center leading-tight">
+                          <span className="text-[8px] sm:text-[10px] font-mono text-gray-400 group-hover:text-white transition-colors text-center leading-tight">
                             {tech.name}
                           </span>
                         </motion.div>
                       ))}
-                    </div>
-
-                    <div className="font-mono text-xs sm:text-sm text-yellow-300 ml-3 sm:ml-0">
-                      ];
                     </div>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* Export Statement */}
-            <div className="font-mono text-xs sm:text-sm mt-6 sm:mt-8 pt-4 sm:pt-6 md:pt-8 border-t-2 border-gray-800">
+            {/* Footer */}
+            <div className="font-mono text-xs sm:text-sm mt-6 sm:mt-8 pt-4 border-t-2 border-gray-800">
               <span className="text-purple-400">export</span>{' '}
               <span className="text-purple-400">default</span>{' '}
               <span className="text-blue-400">TechStack</span>
               <span className="text-gray-500">;</span>
             </div>
-
           </div>
         </motion.div>
 
@@ -191,16 +146,6 @@ export default function TechStack() {
           <span>echo &quot;Stack loaded successfully&quot;</span>
           <span className="animate-pulse">_</span>
         </div>
-
-      </div>
-
-      {/* Background Pattern */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none font-mono text-xs text-black overflow-hidden select-none">
-        {Array.from({ length: 30 }).map((_, i) => (
-          <div key={i}>
-            {'import { tech } from "./stack"; '.repeat(5)}
-          </div>
-        ))}
       </div>
     </section>
   );

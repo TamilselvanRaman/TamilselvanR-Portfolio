@@ -44,7 +44,7 @@ export default function CodingStats({
   const githubStats = use(githubStatsPromise);
 
   return (
-    <section className="bg-[#F5F5DC] py-16 sm:py-20 md:py-24 px-4 sm:px-6 border-y-4 border-black relative overflow-hidden">
+    <section className="bg-[#F5F5DC] py-16 sm:py-20 md:py-24 px-4 sm:px-6 border-y-4 border-black relative" style={{ overflowX: 'clip' }}>
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* SECTION TITLE */}
@@ -247,14 +247,6 @@ export default function CodingStats({
         </div>
       </div>
 
-      {/* Background Console Pattern */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none font-mono text-xs text-black overflow-hidden select-none">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div key={i}>
-            {'> '.repeat(100)}
-          </div>
-        ))}
-      </div>
     </section>
   );
 }

@@ -25,7 +25,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#1E1E1E] border-t-4 border-black relative overflow-hidden z-10">
+    <footer className="bg-[#1E1E1E] border-t-4 border-black relative z-10" style={{ overflowX: 'clip' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 relative z-20">
         
         {/* Terminal Style Card */}

@@ -8,6 +8,7 @@ import { Project, ProjectInput } from '@/types/project';
 import { FaEdit, FaTrash, FaPlus, FaSave, FaTimes, FaGripVertical, FaEnvelope, FaProjectDiagram, FaUserShield, FaImage } from 'react-icons/fa';
 import { Reorder } from 'framer-motion';
 import ImageUpload from '@/components/admin/ImageUpload';
+import MultiImageUpload from '@/components/admin/MultiImageUpload';
 
 interface Message {
   id: string;
@@ -33,6 +34,8 @@ export default function AdminDashboard() {
     githubUrl: '',
     liveUrl: '',
     imageUrl: '',
+    images: [],
+    longDescription: '',
     featured: false,
     order: 0,
   });
@@ -90,6 +93,8 @@ export default function AdminDashboard() {
       githubUrl: project.githubUrl,
       liveUrl: project.liveUrl,
       imageUrl: project.imageUrl,
+      images: project.images || [],
+      longDescription: project.longDescription || '',
       featured: project.featured,
       order: project.order,
     });
@@ -132,6 +137,8 @@ export default function AdminDashboard() {
       githubUrl: '',
       liveUrl: '',
       imageUrl: '',
+      images: [],
+      longDescription: '',
       featured: false,
       order: 0,
     });
@@ -337,6 +344,24 @@ export default function AdminDashboard() {
                       <ImageUpload 
                         currentImage={formData.imageUrl} 
                         onImageSelected={(base64) => setFormData({ ...formData, imageUrl: base64 || '' })}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Additional Screenshots</label>
+                      <MultiImageUpload 
+                        images={formData.images || []} 
+                        onChange={(images) => setFormData({ ...formData, images })}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Long Description (Terminal Block)</label>
+                      <textarea
+                        value={formData.longDescription}
+                        onChange={(e) => setFormData({ ...formData, longDescription: e.target.value })}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2.5 h-32 resize-none focus:ring-2 focus:ring-blue-500 outline-none transition-all font-mono text-sm"
+                        placeholder="Detailed technical description..."
                       />
                     </div>
                   </div>

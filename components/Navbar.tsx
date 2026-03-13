@@ -32,7 +32,7 @@ export default function Navbar() {
     { name: '/ABOUT', href: '#about' },
     { name: '/SKILLS', href: '#threads' },
     { name: '/LOGS', href: '#curated' },
-    { name: '/WORK', href: '#work' },
+    { name: '/WORK', href: '/projects' },
   ];
 
   const baseButton =

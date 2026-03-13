@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState, FormEvent } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { collection, getDocs, deleteDoc, doc, setDoc } from 'firebase/firestore';
+import { db, auth } from '@/lib/firebase';
 import { getProjects, addProject, updateProject, deleteProject, uploadProjectImage, updateProjectsOrder } from '@/lib/projects';
 import { Project, ProjectInput } from '@/types/project';
 import { FaEdit, FaTrash, FaPlus, FaSave, FaTimes, FaGripVertical, FaEnvelope, FaProjectDiagram, FaUserShield, FaImage } from 'react-icons/fa';
@@ -74,6 +74,26 @@ export default function AdminDashboard() {
       setMessages(messages.filter((m) => m.id !== id));
     } catch (error) {
       console.error('Error deleting message:', error);
+      alert('Failed to delete message. This could be a permission error. Click "Setup Admin Role" if you haven\'t yet.');
+    }
+  };
+
+  // --- TEMP SETUP SCRIPT ---
+  const ensureAdminRole = async () => {
+    if (!auth.currentUser) {
+      alert('You must be logged in first.');
+      return;
+    }
+    try {
+      await setDoc(doc(db, 'users', auth.currentUser.uid), {
+        email: auth.currentUser.email,
+        role: 'admin',
+        createdAt: new Date()
+      });
+      alert('Admin role successfully set for ' + auth.currentUser.email + '! You can now delete messages.');
+    } catch (error: any) {
+      console.error(error);
+      alert('Error setting admin role: ' + error.message);
     }
   };
 
@@ -217,6 +237,13 @@ export default function AdminDashboard() {
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
               <p className="text-lg font-bold text-gray-900">Active</p>
             </div>
+            {/* Temp Setup Button */}
+            <button 
+              onClick={ensureAdminRole}
+              className="mt-2 text-[10px] bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200"
+            >
+              Setup Admin Role
+            </button>
           </div>
           <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center text-purple-600">
             <FaUserShield size={20} />
